@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica, sans-serif;
+}
+
+body {
+    background-color: #333745;
+}
+
+header {
+    background-color: #20222b;
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+header>p {
+    font-size: 1rem;
+    color: #a5aed7;
+}
+
+main {
+    margin: 2rem 20vw;
+}
+
+main>button {
+    padding: 1rem 2rem;
+    width: 100%;
+    background-color: #8357c5;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 600;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+    border-bottom: 0.4rem solid #693cad;
+}
+
+main>button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+main>div {
+    margin: 2rem 0;
+}
+
+main>div>div:nth-child(1) {
+    display: flex;
+    background-color: #3c4251;
+    color: #a5afd7;
+    padding: 0.8rem 1.6rem;
+    justify-content: space-between;
+}
+
+main>div>div:nth-child(1)>a {
+    text-decoration: none;
+    color: inherit;
+}
+
+main>div>div:nth-child(1)>a:hover {
+    color: white;
+}
+
+main>div>div:nth-child(2) {
+    background-color: #464b5e;
+    color: #a5afd7;
+    text-align: center;
+    padding: 1.6rem;
+    border-bottom: 1px solid #5c627b;
+}
+
+main>div>form {
+    display: flex;
+    background-color: #464b5e;
+    padding: 1rem 1.6rem;
+    gap: 5%;
+}
+
+main>div>form>input {
+    background-color: #333745;
+    border: none;
+    width: 75%;
+    color: #a5afd7;
+    padding: 1rem;
+    border-bottom: 0.2rem solid #1d2028;
+}
+
+main>div>form>button {
+    background-color: #8357c5;
+    width: 20%;
+    border: none;
+    border-radius: 1rem;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+main>div>form>button:hover {
+    opacity: 1;
+}
+
+#alert {
+    width: 70vw;
+    padding: 1rem;
+    background-color: red;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    right: 15vw;
+    font-size: 1rem;
+    display: none;
+}
+
+.closebtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.closebtn:hover {
+    color: gray;
+}
