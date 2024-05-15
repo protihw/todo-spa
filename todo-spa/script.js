@@ -1,4 +1,4 @@
-function incluir() {
+function addTask() {
     let description = document.getElementById("description");
 
     if (description.value == "") {
@@ -9,4 +9,9 @@ function incluir() {
         message.innerText = "Você precisa descrever a nova tarefa.";
         alert.style.display = "block";
     }
+}
+
+function closeMessage() {
+    let alert = document.getElementById("alert");
+    alert.style.display = "none";
 }
