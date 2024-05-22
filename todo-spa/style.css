@@ -128,3 +128,12 @@ main>div>form>button:hover {
 .closebtn:hover {
     color: gray;
 }
+ 
+#tasks_box>li{
+    display: flex;
+    justify-content: space-between;
+} 
+
+#tasks_box>li>a:hover{
+    color: white;
+}
