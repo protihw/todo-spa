@@ -1,14 +1,14 @@
 let taskList = [];
 
 function addTask(event) {
-    event.preventDefault()
+    event.preventDefault();
 
     let description = document.getElementById("description");
 
     if (description.value == "") {
         showMessage();
     } else {
-        taskList.push(description.value)
+        taskList.push({ description: description.value, completed: false });
         description.value = "";
         updateTasks();
     }
@@ -21,7 +21,7 @@ function closeMessage() {
 
 function showMessage() {
     let messageType = document.getElementById("message_type");
-    message_type.innerText = "Erro: "
+    messageType.innerText = "Erro: ";
 
     let message = document.getElementById("message");
     message.innerText = "Você precisa descrever a nova tarefa.";
@@ -35,41 +35,26 @@ function showMessage() {
 }
 
 function updateTasks() {
+    let rdmBtn = document.getElementById("rdmbtn");
     let divTasks = document.getElementById("tasks");
 
     if (taskList.length > 0) {
         let newOl = document.createElement("ol");
         newOl.id = "tasks_box";
 
-        taskList.forEach((task) => {
-            let newLi = document.createElement("li");
-            newLi.innerText = task;
-            
-            let checkBtn = document.createElement("a");
-            checkBtn.innerHTML = "Confirmar";
-            checkBtn.onclick = function () {
-                checkTask();
-            }
-
-            let removeBtn = document.createElement("a");
-            removeBtn.innerText = "Remover";
-            removeBtn.onclick = function () {
-                removeTask(task);
-            };
-
-            newLi.append(checkBtn);
-            newLi.append(removeBtn);
-            newOl.append(newLi);
-        })
+        taskList.forEach((task, index) => {
+            createElements(newOl, task, index)
+        });
 
         divTasks.replaceChildren(newOl);
 
-        let rdmBtn = document.getElementById("rdmbtn");
         rdmBtn.disabled = false;
     } else {
         let p = document.createElement("p");
         p.innerText = "Insira a primeira tarefa para começar...";
         divTasks.replaceChildren(p);
+
+        rdmBtn.disabled = true;
     }
 }
 
@@ -78,18 +63,14 @@ function removeAll() {
     updateTasks();
 }
 
-function removeTask(task) {
-    let taskIndex = taskList.indexOf(task);
-    taskList.splice(taskIndex, 1);
+function removeTask(index) {
+    taskList.splice(index, 1);
     updateTasks();
 }
 
-
-// Terminar função
-
-function checkTask(task) {
-    let taskIndex = taskList.indexOf(task);
-    
+function checkTask(index) {
+    taskList[index].completed = true;
+    updateTasks();
 }
 
 function getRandomInt(min, max) {
@@ -99,12 +80,54 @@ function getRandomInt(min, max) {
 }
 
 function showTask(task) {
-    let newP = task;
+    let newP = document.createElement("p");
+    newP.innerText = task;
     let divTasks = document.getElementById("tasks");
     divTasks.replaceChildren(newP);
 }
 
 function randomizeTask() {
-    randomIndex = getRandomInt(0, taskList.length);
-    showTask(taskList[randomIndex]);
+    let randomIndex = getRandomInt(0, taskList.length);
+    showTask(taskList[randomIndex].description);
 }
+
+function createElements(newOl, task, index) {
+    let newSpan = document.createElement("span");
+    newSpan.innerText = task.description;
+
+    if (task.completed) {
+        newSpan.classList.add('completed-task');
+    }
+
+    let newLi = document.createElement("li");
+
+    let olIcons = document.createElement("ol");
+    let liCheck = document.createElement("li");
+    let liRemove = document.createElement("li");
+
+    let elementA1 = document.createElement("a");
+    let checkBtn = document.createElement("i");
+    checkBtn.className = "fa fa-check";
+    checkBtn.onclick = function () {
+        checkTask(index);
+    };
+
+    let elementA2 = document.createElement("a");
+    let removeBtn = document.createElement("i");
+    removeBtn.className = "fa fa-times";
+    removeBtn.onclick = function () {
+        removeTask(index);
+    };
+
+    elementA1.append(checkBtn);
+    elementA2.append(removeBtn);
+    liCheck.append(elementA1);
+    liRemove.append(elementA2);
+    olIcons.append(liCheck);
+    olIcons.append(liRemove);
+    newLi.append(newSpan);
+    newLi.append(olIcons);
+    newOl.append(newLi);
+}
+
+window.onload = updateTasks;

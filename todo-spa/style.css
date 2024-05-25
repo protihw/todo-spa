@@ -128,12 +128,24 @@ main>div>form>button:hover {
 .closebtn:hover {
     color: gray;
 }
- 
-#tasks_box>li{
+
+#tasks_box>li {
     display: flex;
     justify-content: space-between;
-} 
 
-#tasks_box>li>a:hover{
+}
+
+#tasks_box>li>ol {
+    display: inherit;
+    gap: 1vw;
+    list-style: none;
+}
+
+#tasks_box>li>ol>li>a:hover {
     color: white;
+}
+
+.completed-task {
+    color: green;
+    text-decoration: underline;
 }
