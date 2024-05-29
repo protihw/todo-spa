@@ -91,6 +91,28 @@ function randomizeTask() {
     showTask(taskList[randomIndex].description);
 }
 
+// Modificar as funções filterByName e searchTask
+
+function filterByName(obj) {
+    query = document.getElementById("query").value;
+
+    if (String(obj).toLowerCase().indexOf(String(query).toLowerCase()) > -1) {
+        return true;
+    }
+    return false;
+}
+
+function searchTask(event) {
+    event.preventDefault();
+
+    filteredTaskList = taskList.filter((task) => {
+        if(filterByName(task)){
+            return task;
+        }
+    });
+    console.log(filteredTaskList);
+}
+
 function createElements(newOl, task, index) {
     let newSpan = document.createElement("span");
     newSpan.innerText = task.description;
