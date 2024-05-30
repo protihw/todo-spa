@@ -21,8 +21,8 @@
         <div>
             <div>
                 <p><strong>Suas Opções</strong></p>
-                <form onsubmit="searchTask(event)">
-                    <input type="text" id="query">
+                <form>
+                    <input type="text" id="query" oninput="searchTask()">
                 </form>
                 <a onclick="removeAll()">Remover Todos</a>
             </div>

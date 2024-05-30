@@ -1,4 +1,5 @@
 let taskList = [];
+let filteredTaskList = [];
 
 function addTask(event) {
     event.preventDefault();
@@ -38,36 +39,55 @@ function updateTasks() {
     let rdmBtn = document.getElementById("rdmbtn");
     let divTasks = document.getElementById("tasks");
 
-    if (taskList.length > 0) {
+    if (filteredTaskList.length == 0) {
+        if (taskList.length > 0) {
+            let newOl = document.createElement("ol");
+            newOl.id = "tasks_box";
+
+            taskList.forEach((task, index) => {
+                createElements(newOl, task, index)
+            });
+
+            divTasks.replaceChildren(newOl);
+
+            rdmBtn.disabled = false;
+        } else {
+            let p = document.createElement("p");
+            p.innerText = "Insira a primeira tarefa para começar...";
+            divTasks.replaceChildren(p);
+
+            rdmBtn.disabled = true;
+        }
+    } else {
         let newOl = document.createElement("ol");
         newOl.id = "tasks_box";
 
-        taskList.forEach((task, index) => {
+        filteredTaskList.forEach((task, index) => {
             createElements(newOl, task, index)
         });
 
         divTasks.replaceChildren(newOl);
 
         rdmBtn.disabled = false;
-    } else {
-        let p = document.createElement("p");
-        p.innerText = "Insira a primeira tarefa para começar...";
-        divTasks.replaceChildren(p);
-
-        rdmBtn.disabled = true;
     }
 }
 
 function removeAll() {
     taskList = [];
+    filteredTaskList = [];
     updateTasks();
 }
 
+// Rever esta função
 function removeTask(index) {
+    let taskDescription = taskList[index].description;
+
     taskList.splice(index, 1);
+    filteredTaskList.splice(filteredTaskList.indexOf(taskDescription), 1);
     updateTasks();
 }
 
+// Rever esta função
 function checkTask(index) {
     taskList[index].completed = true;
     updateTasks();
@@ -91,14 +111,19 @@ function randomizeTask() {
     showTask(taskList[randomIndex].description);
 }
 
-function searchTask(event) {
-    event.preventDefault();
+function searchTask() {
     let query = document.getElementById("query").value;
 
-    filteredTaskList = taskList.filter((task) => {
-        // Retorna as tarefas que possuem a string digitada pelo usuário no input "query"
-        return String(task.description).toLowerCase().indexOf(String(query).toLowerCase()) > -1;
-    });
+    if (query == "") {
+        filteredTaskList = [];
+    } else {
+        filteredTaskList = taskList.filter((task) => {
+            // Retorna as tarefas que possuem a string digitada pelo usuário no input "query"
+            return String(task.description).toLowerCase().indexOf(String(query).toLowerCase()) > -1;
+        });
+    }
+
+    updateTasks();
 }
 
 function createElements(newOl, task, index) {
