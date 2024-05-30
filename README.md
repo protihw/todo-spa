@@ -46,7 +46,9 @@ Passos para instalar:
 
 * Filtrar tarefas:
   - Filtre as tarefas que você adicionou pelo nome digitando no campo abaixo:
+    
     ![image](https://github.com/protihw/todo-spa/assets/69305991/c5205b25-e0f8-4ca2-a2f8-97bfacd57863)
+    
     (Você pode apenas digitar o que deseja filtrar ou clicar na lupa ao lado também)
 
 * Randomizar tarefas:
