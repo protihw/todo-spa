@@ -91,26 +91,14 @@ function randomizeTask() {
     showTask(taskList[randomIndex].description);
 }
 
-// Modificar as funções filterByName e searchTask
-
-function filterByName(obj) {
-    query = document.getElementById("query").value;
-
-    if (String(obj).toLowerCase().indexOf(String(query).toLowerCase()) > -1) {
-        return true;
-    }
-    return false;
-}
-
 function searchTask(event) {
     event.preventDefault();
+    let query = document.getElementById("query").value;
 
     filteredTaskList = taskList.filter((task) => {
-        if(filterByName(task)){
-            return task;
-        }
+        // Retorna as tarefas que possuem a string digitada pelo usuário no input "query"
+        return String(task.description).toLowerCase().indexOf(String(query).toLowerCase()) > -1;
     });
-    console.log(filteredTaskList);
 }
 
 function createElements(newOl, task, index) {
