@@ -44,8 +44,8 @@ function updateTasks() {
             let newOl = document.createElement("ol");
             newOl.id = "tasks_box";
 
-            taskList.forEach((task, index) => {
-                createElements(newOl, task, index)
+            taskList.forEach((task) => {
+                createElements(newOl, task)
             });
 
             divTasks.replaceChildren(newOl);
@@ -62,8 +62,8 @@ function updateTasks() {
         let newOl = document.createElement("ol");
         newOl.id = "tasks_box";
 
-        filteredTaskList.forEach((task, index) => {
-            createElements(newOl, task, index)
+        filteredTaskList.forEach((task) => {
+            createElements(newOl, task)
         });
 
         divTasks.replaceChildren(newOl);
@@ -78,18 +78,41 @@ function removeAll() {
     updateTasks();
 }
 
-// Rever esta função
-function removeTask(index) {
-    let taskDescription = taskList[index].description;
+function searchForIndex(array, valueName) {
+    let valueIndex;
 
-    taskList.splice(index, 1);
-    filteredTaskList.splice(filteredTaskList.indexOf(taskDescription), 1);
+    array.forEach((value, index) => {
+        if (value.description == valueName) {
+            valueIndex = index;
+        }
+    })
+
+    return valueIndex;
+}
+
+function removeTask(taskName) {
+    let query = document.getElementById("query").value;
+
+    if (query.length > 0 && filteredTaskList.length > 0) {
+        filteredTaskList.splice(searchForIndex(filteredTaskList, taskName), 1);
+        taskList.splice(searchForIndex(taskList, taskName), 1);
+    } else {
+        taskList.splice(searchForIndex(taskList, taskName), 1);
+    }
+
     updateTasks();
 }
 
-// Rever esta função
-function checkTask(index) {
-    taskList[index].completed = true;
+function checkTask(taskName) {
+    let query = document.getElementById("query").value;
+
+    if (query.length > 0 && filteredTaskList.length > 0) {
+        filteredTaskList[searchForIndex(filteredTaskList, taskName)].completed = true;
+        taskList[searchForIndex(taskList, taskName)].completed = true;
+    } else {
+        taskList[searchForIndex(taskList, taskName)].completed = true;
+    }
+
     updateTasks();
 }
 
@@ -126,7 +149,7 @@ function searchTask() {
     updateTasks();
 }
 
-function createElements(newOl, task, index) {
+function createElements(newOl, task) {
     let newSpan = document.createElement("span");
     newSpan.innerText = task.description;
 
@@ -144,14 +167,14 @@ function createElements(newOl, task, index) {
     let checkBtn = document.createElement("i");
     checkBtn.className = "fa fa-check";
     checkBtn.onclick = function () {
-        checkTask(index);
+        checkTask(task.description);
     };
 
     let elementA2 = document.createElement("a");
     let removeBtn = document.createElement("i");
     removeBtn.className = "fa fa-times";
     removeBtn.onclick = function () {
-        removeTask(index);
+        removeTask(task.description);
     };
 
     elementA1.append(checkBtn);
