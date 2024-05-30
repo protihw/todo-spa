@@ -23,8 +23,9 @@
                 <p><strong>Suas Opções</strong></p>
                 <form>
                     <input type="text" id="query" oninput="searchTask()">
+                    <a onclick="searchTask()"><i class="fa fa-search"></i></a>
+                    <a onclick="removeAll()"><i class="fa fa-trash"></i></a>
                 </form>
-                <a onclick="removeAll()">Remover Todos</a>
             </div>
             <div id="tasks">
                 <p>Insira a primeira tarefa para começar...</p>

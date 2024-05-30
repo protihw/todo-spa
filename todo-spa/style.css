@@ -149,3 +149,27 @@ main>div>form>button:hover {
     color: green;
     text-decoration: underline;
 }
+
+#query {
+    background-color: #333745;
+    border-radius: 7.5px;
+    color: #a5afd7;
+    border-bottom: .15rem solid #1d2028;
+}
+
+main>div>div>form {
+    display: flex;
+    gap: .5rem;
+}
+
+main>div>div>form>a:hover {
+    color: white;
+    cursor: pointer;
+}
+
+#tasks_box>li>span {
+    display: inline-block;
+    max-width: 90%;
+    word-wrap: break-word;
+    text-align: justify;
+}
