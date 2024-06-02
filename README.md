@@ -16,7 +16,7 @@ Passos para instalar:
 
 1. Clone o repositório:
     ```sh
-    git clone https://protihw.itch.io/factory-escape.git
+    git clone https://github.com/protihw/todo-spa.git
     ```
 2. Navegue até o diretório do projeto no seu gerenciador de arquivos.
 
